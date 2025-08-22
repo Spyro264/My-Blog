@@ -1,9 +1,9 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const Login = () => {
   return (
     <Box>
-      <Login></Login>
+      <Typography>Hi</Typography>
     </Box>
   );
 };
