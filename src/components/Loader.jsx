@@ -18,6 +18,7 @@ const Loader = ({ open }) => {
           justifyContent: "center",
           alignItems: "center",
           height: "100vh",
+          backgroundColor: "transparent",
         }}
       >
         <CircularProgress size={"3rem"} sx={{ color: "yellow" }} />

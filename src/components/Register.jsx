@@ -1,14 +1,25 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import { RegisterUser } from "../firebaseConfig/auth";
 import { useNavigate } from "react-router-dom";
 import ToastMessage from "./ToastMessage";
 import Loader from "./Loader";
+import MailIcon from "@mui/icons-material/Mail";
+import LockIcon from "@mui/icons-material/Lock";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Register = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [loader, setLoader] = useState(false);
+  const [showPassword, setPassword] = useState(false);
   const [Snackbar, setSnackbar] = useState({
     boolen: false,
     message: "",
@@ -16,6 +27,10 @@ const Register = () => {
   });
 
   const navigate = useNavigate();
+
+  const handleTogglePassword = () => {
+    setPassword((prev) => !prev);
+  };
 
   const handleRegister = async () => {
     setLoader(true);
@@ -69,19 +84,25 @@ const Register = () => {
         padding={{ xs: 1 }}
       >
         <Box
+          //   border={"2px solid red"}
           display={"flex"}
-          justifyContent={"flex-start"}
+          justifyContent={"center"}
           alignItems={"start"}
           flexDirection={"column"}
           boxShadow={4}
           gap={3}
-          height={"50vh"}
-          width={{ xs: "100%", sm: "100%", md: "25%" }}
+          height={{
+            xs: "50vh",
+            sm: "50vh",
+            md: "50vh",
+            lg: "60vh",
+          }}
+          width={{ xs: "100%", sm: "50%", md: "25%" }}
           borderRadius={3}
-          paddingX={{ xs: 3, sm: 0, md: 5 }}
+          paddingX={{ xs: 3, sm: 3, md: 5 }}
         >
           {/* {Heading box} */}
-          <Box borderRadius={10} width={"100%"} mt={{ xs: 2.5, sm: 2, md: 8 }}>
+          <Box borderRadius={10} width={"100%"} mt={{ xs: 0, sm: 2, md: 0 }}>
             <Typography
               fontSize={{ xs: "1.5rem", sm: "1.5rem", md: "2rem" }}
               fontWeight={900}
@@ -112,11 +133,31 @@ const Register = () => {
               placeholder="Enter Your Email Address"
               fullWidth
               onChange={(e) => setUserEmail(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <MailIcon sx={{ color: "gray" }} />
+                  </InputAdornment>
+                ),
+              }}
             />
             <TextField
               placeholder="Enter Password"
               fullWidth
+              type={showPassword ? "text" : "password"}
               onChange={(e) => setUserPassword(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <LockIcon sx={{ color: "gray" }} />
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment onClick={handleTogglePassword} position="end">
+                    {showPassword ? <VisibilityOff /> : <Visibility />}{" "}
+                  </InputAdornment>
+                ),
+              }}
             />
           </Box>
 
