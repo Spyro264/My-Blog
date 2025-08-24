@@ -14,10 +14,14 @@ import MailIcon from "@mui/icons-material/Mail";
 import LockIcon from "@mui/icons-material/Lock";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { auth } from "../firebaseConfig/firebase";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [userName, setUserName] = useState("");
   const [loader, setLoader] = useState(false);
   const [showPassword, setPassword] = useState(false);
   const [Snackbar, setSnackbar] = useState({
@@ -28,22 +32,34 @@ const Register = () => {
 
   const navigate = useNavigate();
 
+  // fun to show and hide password
   const handleTogglePassword = () => {
     setPassword((prev) => !prev);
   };
 
+  // fun to create use account
   const handleRegister = async () => {
     setLoader(true);
 
     // email and pass is null it will exit this function
-    if (!userEmail && !userPassword) {
+    if (!userEmail || !userPassword || !userName) {
       setLoader(false);
-      return alert("enter valid id and pass");
+      setSnackbar({
+        boolen: true,
+        message: "Fields Should Not Be Empty",
+        error: "info",
+      });
+      return;
     }
 
     try {
-      await RegisterUser(userEmail, userPassword).then((res) => {
+      await RegisterUser(userEmail, userPassword).then(async (res) => {
         if (res.operationType === "signIn") {
+          if (auth.currentUser) {
+            await updateProfile(auth.currentUser, {
+              displayName: userName,
+            });
+          }
           setSnackbar({
             boolen: true,
             message: "Account Created And Logged In Successfully",
@@ -129,6 +145,18 @@ const Register = () => {
             width={"100%"}
             mt={3}
           >
+            <TextField
+              placeholder="Enter Your Name"
+              fullWidth
+              onChange={(e) => setUserName(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AccountCircleIcon sx={{ color: "gray" }} />
+                  </InputAdornment>
+                ),
+              }}
+            />
             <TextField
               placeholder="Enter Your Email Address"
               fullWidth

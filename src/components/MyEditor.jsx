@@ -10,7 +10,6 @@ const MyEditor = () => {
 
   // Split text by triple backticks
   const parts = text.split(/```/);
-  console.log({ parts });
 
   return (
     <Box

@@ -65,7 +65,7 @@ const Login = () => {
 
         // navigate to home after 2 seconds
         setTimeout(() => {
-          //   navigate("/");
+          navigate("/");
         }, 3000);
       });
     } catch (error) {

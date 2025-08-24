@@ -11,18 +11,27 @@ import {
   ListItem,
   ListItemText,
   Collapse,
+  Popover,
+  Paper,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import CloseIcon from "@mui/icons-material/Close";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { drawerItems } from "../data/Navitem";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authContext";
+import { SignOut } from "../firebaseConfig/auth";
 
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState({});
+  const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
+  const user = useAuth();
+
+  const open = Boolean(anchorEl);
 
   const toggleDrawer = (open) => () => setDrawerOpen(open);
 
@@ -63,18 +72,77 @@ const Navbar = () => {
               </Box>
 
               {/* Login Buttons */}
-              <Box
-                display={{ xs: "none", sm: "none", md: "flex" }}
-                alignItems={"center"}
-                gap={2}
-              >
-                <Button variant="main" onClick={() => navigate("/login")}>
-                  Login
-                </Button>
-                <Button variant="main" onClick={() => navigate("/register")}>
-                  Sign up
-                </Button>
-              </Box>
+              {user?.user?.displayName ? (
+                <Box
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  flexDirection={"column"}
+                >
+                  <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
+                    <AccountCircleIcon
+                      fontSize="large"
+                      sx={{ color: "black" }}
+                    />
+                  </IconButton>
+                  <Popover
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={() => setAnchorEl(null)}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "center",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "center",
+                    }}
+                    sx={{
+                      mt: 2,
+                      p: 3,
+                    }}
+                  >
+                    <Paper
+                      sx={{
+                        width: "200px",
+                        height: "15vh",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        flexDirection: "column",
+                        p: 1,
+                      }}
+                    >
+                      <Typography variant="h6" fontWeight={900}>
+                        Name: {user.displayName}
+                      </Typography>
+                      <Button
+                        variant="main"
+                        sx={{ mt: 3 }}
+                        onClick={() => {
+                          SignOut();
+                          navigate("/login");
+                        }}
+                      >
+                        Logout
+                      </Button>
+                    </Paper>
+                  </Popover>
+                </Box>
+              ) : (
+                <Box
+                  display={{ xs: "none", sm: "none", md: "flex" }}
+                  alignItems={"center"}
+                  gap={2}
+                >
+                  <Button variant="main" onClick={() => navigate("/login")}>
+                    Login
+                  </Button>
+                  <Button variant="main" onClick={() => navigate("/register")}>
+                    Sign up
+                  </Button>
+                </Box>
+              )}
             </Box>
           </Toolbar>
         </AppBar>
