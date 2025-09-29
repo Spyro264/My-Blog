@@ -2,13 +2,12 @@ import HomeIcon from "@mui/icons-material/Home";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import InfoIcon from "@mui/icons-material/Info";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import JavascriptIcon from "@mui/icons-material/Javascript";
 
 export const drawerItems = [
   {
     name: "Git",
     children: ["SubHome1", "SubHome2"],
-    icon: <GitHubIcon />, // store the component, not JSX
+    icon: <GitHubIcon />,
   },
   {
     name: "Java Script",

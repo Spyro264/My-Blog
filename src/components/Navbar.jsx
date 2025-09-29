@@ -44,7 +44,7 @@ const Navbar = () => {
       <Box height={"8vh"}>
         <AppBar
           position="static"
-          sx={{ height: "8vh", backgroundColor: "white" }}
+          sx={{ height: "8vh", backgroundColor: "#f3f4f6" }}
         >
           <Toolbar sx={{ height: "100%" }}>
             <Box
@@ -56,13 +56,13 @@ const Navbar = () => {
               {/* Menu Icon and Logo */}
               <Box display={"flex"} alignItems={"center"} gap={3}>
                 <IconButton onClick={toggleDrawer(true)}>
-                  <MenuIcon sx={{ color: "black" }} fontSize="large" />
+                  <MenuIcon sx={{ color: "#059669" }} fontSize="large" />
                 </IconButton>
 
                 <Typography
                   variant="h4"
                   sx={{
-                    color: "black",
+                    color: "#059669",
                     fontWeight: 900,
                     display: { xs: "none", sm: "none", md: "block" },
                   }}
@@ -114,7 +114,7 @@ const Navbar = () => {
                       }}
                     >
                       <Typography variant="h6" fontWeight={900}>
-                        Name: {user.displayName}
+                        Name: {user?.user?.displayName || ""}
                       </Typography>
                       <Button
                         variant="main"
@@ -183,11 +183,7 @@ const Navbar = () => {
                       paddingRight: 2,
                     }}
                   >
-                    <ListItem
-                      button
-                      key={item.name}
-                      // sx={{ border: "2px solid red" }}
-                    >
+                    <ListItem button key={item.name}>
                       <Box display="flex" alignItems="center" gap={1}>
                         <IconButton>{item.icon}</IconButton>
                         <Typography

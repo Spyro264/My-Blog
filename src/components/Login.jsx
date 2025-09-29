@@ -16,7 +16,7 @@ import CallIcon from "@mui/icons-material/Call";
 import AppleIcon from "@mui/icons-material/Apple";
 import { useState } from "react";
 import ToastMessage from "./ToastMessage";
-import { EmailLogin } from "../firebaseConfig/auth";
+import { EmailLogin, GoogleLogin } from "../firebaseConfig/auth";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
 
@@ -86,6 +86,30 @@ const Login = () => {
     }
   };
 
+  // google login function
+  const handleGoogleLogin = async () => {
+    try {
+      const res = await GoogleLogin();
+      if (res.user.uid) {
+        setSnackbar({
+          boolen: true,
+          message: "Logged In Successfully",
+          error: "success",
+        });
+      }
+      setTimeout(() => {
+        navigate("/");
+      }, 500);
+    } catch (error) {
+      console.log({ googleLoginerror: error });
+      setSnackbar({
+        boolen: true,
+        message: error,
+        error: "error",
+      });
+    }
+  };
+
   return (
     <>
       {loader && <Loader open={loader} />}
@@ -108,7 +132,6 @@ const Login = () => {
           <Box width={"100%"} height={"100%"} borderRadius={10}>
             {/* {HEading box} */}
             <Box
-              //   border={"2px solid red"}
               height={"30%"}
               borderRadius={2}
               display={"flex"}
@@ -263,6 +286,7 @@ const Login = () => {
                     color: "black",
                     py: { xs: 1, sm: 1, md: 1.5 },
                   }}
+                  onClick={handleGoogleLogin}
                 ></Button>
                 <Button
                   variant="contained"
