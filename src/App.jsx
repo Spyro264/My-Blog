@@ -5,6 +5,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import AuthProvider from "./context/authContext";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
+import Contact from "./page/Contact";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
         </Routes>
       </AuthProvider>
+      <Contact />
     </div>
   );
 };

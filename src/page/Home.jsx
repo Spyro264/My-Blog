@@ -17,23 +17,23 @@ const Home = () => {
       >
         <Box
           display={"flex"}
-          justifyContent={"space-between"}
+          justifyContent={"center"}
           alignItems={"center"}
-          width={{ xs: "100%", md: "60%" }}
+          width={{ xs: "100%", md: "60%", lg: "100%" }}
           height={{ xs: "100%", md: "70%" }}
           p={1}
-          flexDirection={{ xs: "column", md: "row" }}
+          flexDirection={{ xs: "column", md: "column", lg: "row" }}
         >
           <Box
             height={"100%"}
-            width={{ xs: "100%", md: "50%" }}
+            width={{ xs: "100%", md: "100%", lg: "40%" }}
             display={"flex"}
             justifyContent={"center"}
-            alignItems={"flex-start"}
+            alignItems={{ xs: "center", md: "center", lg: "flex-start" }}
             flexDirection={"column"}
           >
             <Typography
-              fontSize={{ xs: "2rem", md: "4rem" }}
+              fontSize={{ xs: "2.5rem", md: "4rem" }}
               fontWeight={900}
               m={0}
               p={0}
@@ -41,7 +41,7 @@ const Home = () => {
               Welcome To My
             </Typography>
             <Typography
-              fontSize={{ xs: "2rem", md: "4rem" }}
+              fontSize={{ xs: "2.5rem", md: "4rem" }}
               fontWeight={900}
               color="#059669"
               lineHeight={1}
@@ -50,7 +50,12 @@ const Home = () => {
             >
               Creative Space
             </Typography>
-            <Typography variant="body1" mt={2} color="grey">
+            <Typography
+              variant="body1"
+              mt={2}
+              color="grey"
+              textAlign={{ xs: "center", md: "center" }}
+            >
               Sharing thoughts, ideas, and experiences through meaningful
               stories and insights.
             </Typography>
@@ -73,22 +78,31 @@ const Home = () => {
           </Box>
           <Box
             height={"100%"}
-            width={{ xs: "100%", md: "50%" }}
+            width={{ xs: "100%", md: "100%", lg: "30%" }}
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
           >
             <Box
               height={"90%"}
-              width={"90%"}
               borderRadius={2}
               sx={{ backgroundColor: "#d1fae5" }}
+              width={{ xs: "90%" }}
               boxShadow={5}
               display={"flex"}
               justifyContent={"center"}
               alignItems={"flex-end"}
             >
-              <img src={spy} />
+              <img
+                src={spy}
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  borderRadius: "8px",
+                  objectFit: "contain",
+                }}
+                alt="Spy"
+              />
             </Box>
           </Box>
         </Box>
