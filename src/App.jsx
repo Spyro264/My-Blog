@@ -1,34 +1,7 @@
-import { Routes, Route } from "react-router-dom";
-import MyEditor from "./components/MyEditor";
-import Home from "./page/Home";
-import Register from "./components/Register";
-import Login from "./components/Login";
-import AuthProvider from "./context/authContext";
-import ProtectedRoutes from "./routes/ProtectedRoutes";
-import Contact from "./page/Contact";
+import React from "react";
 
 const App = () => {
-  return (
-    <div>
-      <AuthProvider>
-        <Routes>
-          <Route
-            path="/editor"
-            element={
-              <ProtectedRoutes>
-                <MyEditor />
-              </ProtectedRoutes>
-            }
-          />
-
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </AuthProvider>
-      <Contact />
-    </div>
-  );
+  return <div>App</div>;
 };
 
 export default App;
