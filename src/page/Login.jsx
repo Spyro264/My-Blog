@@ -1,8 +1,11 @@
 import { Box, IconButton, TextField, Typography, Button } from "@mui/material";
 import DeblurIcon from "@mui/icons-material/Deblur";
 import CodeIcon from "@mui/icons-material/Code";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   return (
     <Box minHeight={"100vh"} display={"flex"}>
       {/* {rightyy}   */}
@@ -141,6 +144,7 @@ const Login = () => {
               </Typography>
               <Button
                 fullWidth
+                onClick={() => navigate("/register")}
                 sx={{
                   mt: 1,
                   py: 1,
@@ -159,7 +163,7 @@ const Login = () => {
                   },
                 }}
               >
-                Sign In
+                Create an Account
               </Button>
             </Box>
           </Box>
