@@ -4,11 +4,13 @@ import { js_topics } from "../data/JsTopics";
 import { react_topics } from "../data/ReactTopics";
 import CodeIcon from "@mui/icons-material/Code";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 const SideBar = ({ toogleSideBar = true }) => {
+  const loc = useLocation();
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
-  console.log({ isLargeScreen });
+  console.log({ loc: loc.pathname });
 
   return (
     <Drawer
@@ -20,6 +22,10 @@ const SideBar = ({ toogleSideBar = true }) => {
           height: "93vh",
           boxShadow: 2,
           ml: 1,
+          display:
+            loc.pathname.includes("login") || loc.pathname.includes("register")
+              ? "none"
+              : "block",
         },
       }}
     >

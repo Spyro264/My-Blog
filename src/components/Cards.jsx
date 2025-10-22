@@ -1,6 +1,6 @@
 import { Box, IconButton, Typography } from "@mui/material";
 
-const Cards = ({ icon, heading, desc }) => {
+const Cards = ({ icon, heading, desc, bgcolor, borderfilter, border }) => {
   return (
     <Box
       borderRadius={3}
@@ -11,9 +11,9 @@ const Cards = ({ icon, heading, desc }) => {
       gap={3}
       minWidth={"100%"}
       sx={{
-        backgroundColor: "rgba(255, 255, 255, 0.1)",
-        backdropFilter: "blur(16px)",
-        border: "1px solid rgba(255, 255, 255, 0.2)",
+        backgroundColor: bgcolor || "rgba(255, 255, 255, 0.1)",
+        backdropFilter: borderfilter || "blur(16px)",
+        border: border || "1px solid rgba(255, 255, 255, 0.2)",
       }}
     >
       <Box>

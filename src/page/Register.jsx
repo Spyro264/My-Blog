@@ -41,7 +41,7 @@ const Register = () => {
           flexDirection={"column"}
         >
           <i
-            class="fa-solid fa-rocket"
+            className="fa-solid fa-rocket"
             style={{ fontSize: "2.5rem", color: "white" }}
           ></i>
 

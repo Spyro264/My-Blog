@@ -3,14 +3,12 @@ import Chip from "@mui/material/Chip";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { useParams } from "react-router-dom";
-import Navbar from "./Navbar";
 
 const DisplayBlog = () => {
   const { topic } = useParams();
 
   return (
     <>
-      <Navbar />
       <Box display="flex" justifyContent="center" py={4}>
         <Box maxWidth="800px" width="100%" p={3} ml={{ lg: 30 }}>
           {/* {headinf of the page} */}
