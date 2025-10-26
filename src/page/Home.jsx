@@ -1,168 +1,155 @@
-import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
-import { ArrowRight } from "@mui/icons-material";
-
-import { data } from "../data/HomeCardData";
+import { Box, Button, Typography } from "@mui/material";
+import Hyperspeed from "../Animations/Hyperspeed";
+import Lightning from "../Animations/Lightning";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <Box
-      minHeight={"100vh"}
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
       sx={{
-        background:
-          "linear-gradient(to bottom right, #0f172a, #7c2d12, #0f172a)",
+        backgroundColor: "black",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative",
+        overflow: "hidden",
+        ml: { xs: 0, lg: 37 },
       }}
     >
+      {/* {animation} */}
+      {/* <Hyperspeed
+        effectOptions={{
+          onSpeedUp: () => {},
+          onSlowDown: () => {},
+          distortion: "turbulentDistortion",
+          length: 400,
+          roadWidth: 10,
+          islandWidth: 2,
+          lanesPerRoad: 4,
+          fov: 90,
+          fovSpeedUp: 150,
+          speedUp: 2,
+          carLightsFade: 0.4,
+          totalSideLightSticks: 20,
+          lightPairsPerRoadWay: 40,
+          shoulderLinesWidthPercentage: 0.05,
+          brokenLinesWidthPercentage: 0.1,
+          brokenLinesLengthPercentage: 0.5,
+          lightStickWidth: [0.12, 0.5],
+          lightStickHeight: [1.3, 1.7],
+          movingAwaySpeed: [60, 80],
+          movingCloserSpeed: [-120, -160],
+          carLightsLength: [400 * 0.03, 400 * 0.2],
+          carLightsRadius: [0.05, 0.14],
+          carWidthPercentage: [0.3, 0.5],
+          carShiftX: [-0.8, 0.8],
+          carFloorSeparation: [0, 5],
+          colors: {
+            roadColor: 0x080808,
+            islandColor: 0x0a0a0a,
+            background: 0x000000,
+            shoulderLines: 0xffffff,
+            brokenLines: 0xffffff,
+            leftCars: [0xd856bf, 0x6750a2, 0xc247ac],
+            rightCars: [0x03b3c3, 0x0e5ea5, 0x324555],
+            sticks: 0x03b3c3,
+          },
+        }}
+      /> */}
+      <Lightning hue={220} xOffset={0} speed={1} intensity={1} size={1} />
+
+      {/* {Text} */}
       <Box
-        width={{ xs: "100%", lg: "50%" }}
-        py={{ xs: 2, lg: 4 }}
-        display={"flex"}
-        justifyContent={"flex-start"}
-        flexDirection={"column"}
-        gap={3}
+        sx={{
+          position: "absolute",
+          top: "25%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          textAlign: "center",
+          color: "white",
+          zIndex: 1,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          mt: 12,
+        }}
       >
-        {/* {Badge} */}
-        <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+        <Box>
           <Typography
-            fontFamily={'"Roboto", sans-serif'}
-            fontSize={"1rem"}
+            variant="h4"
             sx={{
-              backgroundColor: "rgba(243, 85, 34, 0.1)",
-              border: "1px solid rgba(243, 85, 34, 0.3)",
-              borderRadius: 6,
-              backdropFilter: "blur(4px)",
-              paddingY: { xs: 0.5, lg: 1 },
-              paddingX: { xs: 2, lg: 3 },
-              color: "#FB923C",
+              fontWeight: "bold",
+              fontFamily: '"Roboto", sans-serif',
+              fontSize: { xs: "2.5rem", lg: "5rem" },
             }}
           >
-            Welcome to the tech journey
-          </Typography>
-        </Box>
-
-        {/* {main heading} */}
-        <Box
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          flexDirection={"column"}
-          padding={2}
-        >
-          <Typography
-            fontFamily={'"Roboto", sans-serif'}
-            fontSize={{ xs: "2rem", lg: "3rem" }}
-            fontWeight={"bold"}
-            color="white"
-          >
-            Ignite Your
+            Welcome to SpyroTechTales
           </Typography>
           <Typography
-            fontFamily={'"Roboto", sans-serif'}
-            fontSize={{ xs: "2rem", lg: "3rem" }}
-            fontWeight={"bold"}
             sx={{
-              background:
-                "linear-gradient(to right, #FB923C, #F87171, #F97316)",
+              fontSize: "1rem",
+              marginTop: 1,
+              fontFamily: '"Roboto", sans-serif',
+              background: "linear-gradient(to right, #06b6d4, #3b82f6)",
               WebkitBackgroundClip: "text",
               color: "transparent",
             }}
           >
-            Tech Knowledge
-          </Typography>
-          <Typography
-            fontFamily={'"Roboto", sans-serif'}
-            fontSize={"1rem"}
-            fontWeight={"medoum"}
-            color="#D1D5DB"
-            textAlign={"center"}
-            // border={"2px solid red"}
-            maxWidth={"500px"}
-          >
-            Discover stories, tutorials, and insights that spark curiosity. Dive
-            into the world of technology, development, and innovation.
+            Everything about React and Javascript
           </Typography>
         </Box>
-
-        {/* {Ction Buttons} */}
-        <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+        {/* {buttons} */}
+        <Box
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          gap={3}
+          mt={4}
+        >
           <Button
             variant="contained"
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              background: "linear-gradient(to right, #FB923C, #F87171)",
-              py: 1.5,
-              px: 4,
-              borderRadius: 2,
-              fontFamily: '"Roboto", sans-serif',
-              fontSize: "1rem",
-              transition: "all 0.3s",
-              color: "white",
-              "&:hover": {
-                boxShadow: "0px 4px 15px rgba(243, 85, 34, 0.5)",
-                transform: "translateX(4px)",
-                color: "white",
-              },
+              borderRadius: 6,
+              px: 5,
+              backgroundColor: "white",
+              color: "black",
             }}
-            endIcon={
-              <ArrowRight
-                sx={{ fontSize: "1.25rem", transition: "transform 0.3s" }}
-              />
-            }
+            onClick={() => navigate("/about")}
           >
-            Explore Topics
-          </Button>
-        </Box>
-
-        {/* {card data} */}
-
-        <Grid
-          container
-          padding={2}
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"stretch"}
-          spacing={2}
-        >
-          {data?.map((item, index) => (
-            <Grid
-              key={index}
-              size={{ xs: 12, md: 4, lg: 4 }}
-              borderRadius={2}
-              padding={2}
-              display={"flex"}
-              justifyContent={"centfler"}
-              alignItems={"flex-start"}
-              flexDirection={"column"}
-              gap={1}
-              border={"2px solid rgba(255, 255, 255, 0.1)"}
+            <Typography
               sx={{
-                backgroundColor: "rgba(249, 115, 22, 0.2)",
+                textTransform: "none",
+                fontWeight: "small",
+                fontFamily: '"Roboto", sans-serif',
               }}
             >
-              <IconButton sx={{ p: 0 }}>{item.icon}</IconButton>
-              <Typography
-                fontFamily={'"Roboto", sans-serif'}
-                fontSize={"1rem"}
-                fontWeight={"bold"}
-                color="white"
-              >
-                {item.heading}
-              </Typography>
-              <Typography
-                fontFamily={'"Roboto", sans-serif'}
-                fontWeight={"small"}
-                fontSize={"0.85rem"}
-                color="#cbd5e1"
-              >
-                {item.desc}
-              </Typography>
-            </Grid>
-          ))}
-        </Grid>
+              About
+            </Typography>
+          </Button>
+          <Button
+            sx={{
+              borderRadius: 6,
+              px: 5,
+              border: "1px solid #FFFFFF33",
+              backgroundColor: "transparent",
+            }}
+            onClick={() => navigate("/contact")}
+          >
+            <Typography
+              sx={{
+                textTransform: "none",
+                fontWeight: "small",
+                fontFamily: '"Roboto", sans-serif',
+                color: "white",
+              }}
+            >
+              Contact
+            </Typography>
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

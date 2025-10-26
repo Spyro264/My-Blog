@@ -1,168 +1,143 @@
-import { Box, Button, IconButton, Typography, Drawer } from "@mui/material";
-import DeblurIcon from "@mui/icons-material/Deblur";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close"; // Import Close Icon
-import { useState } from "react";
+import {
+  Box,
+  IconButton,
+  Typography,
+  Button,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import LocalFireDepartmentOutlinedIcon from "@mui/icons-material/LocalFireDepartmentOutlined";
+import { button_data, nav_data } from "../data/navbardata";
 import { useNavigate } from "react-router-dom";
-import { js_topics } from "../data/JsTopics";
-import { react_topics } from "../data/ReactTopics";
-import Collapsable from "./Collapsable";
-import CodeIcon from "@mui/icons-material/Code";
-import { useLocation } from "react-router-dom";
+import Drawer from "./Drawer";
+import { useState } from "react";
 
-const NavBar = () => {
-  const [toogleSideBar, setToogleSideBar] = useState(false);
+const Navbar = () => {
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const navigate = useNavigate();
-  const loc = useLocation();
+  const [open, setOpen] = useState(isLargeScreen ? true : false);
 
-  const handleToogle = () => {
-    setToogleSideBar((prev) => !prev);
+  const style = {
+    fontFamily: '"Roboto", sans-serif',
+    fontSize: "1rem",
+    fontWeight: "bold",
+    background: "linear-gradient(to right, #06b6d4, #3b82f6)",
+    WebkitBackgroundClip: "text",
+    color: "transparent",
+    display: "inline",
   };
-
-  const handleCloseSidebar = () => {
-    setToogleSideBar(false); // Close the sidebar when the close button is clicked
-  };
-
   return (
     <>
-      {/* Navbar Box */}
+      {/* {Drawer} */}
+      <Drawer open={open} />
+
+      {/* {Navbar} */}
       <Box
+        position={"fixed"}
+        width={{ xs: "95.9%", sm: "98%", md: "98.2%", lg: "99%" }}
         display={"flex"}
         justifyContent={"space-between"}
         alignItems={"center"}
-        height={"7vh"}
-        boxShadow={1}
-        px={2} // Added padding for some spacing on the navbar
+        padding={1}
+        paddingX={2}
+        sx={{
+          boxSizing: "border-box",
+          backgroundColor: "transparent",
+          backdropFilter: "blur(10px)", // Apply blur effect to the background
+          WebkitBackdropFilter: "blur(10px)",
+        }}
+        zIndex={1000}
       >
-        {/* Title and Icon Box */}
-        <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+        {/* {menu Icon} */}
+        <Box
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          gap={1}
+        >
           <IconButton
-            sx={{ display: "block" }} // Always show hamburger icon
-            onClick={handleToogle}
+            sx={{ m: 0, p: 0, display: { xs: "block", lg: "none" } }}
+            onClick={() => setOpen((prev) => !prev)}
           >
-            <MenuIcon
-              fontSize="medium"
-              sx={{
-                padding: { xs: 0, lg: 1 },
-                color: "black",
-                borderRadius: 3,
-              }}
+            <MenuOutlinedIcon
+              fontSize="large"
+              sx={{ padding: 1, color: "white" }}
             />
           </IconButton>
-          <IconButton>
-            <DeblurIcon
-              fontSize="medium"
+          <IconButton sx={{ p: 0, m: 0, display: { xs: "none", lg: "block" } }}>
+            <LocalFireDepartmentOutlinedIcon
+              fontSize="large"
               sx={{
-                backgroundColor: "#2563eb",
                 padding: 1,
+                background: "linear-gradient(to right, #06b6d4, #3b82f6)",
                 color: "white",
                 borderRadius: 3,
               }}
             />
           </IconButton>
-
           <Typography
-            fontFamily='"Roboto", sans-serif'
-            fontSize={{ xs: "1rem", md: "1.5rem" }}
-            fontWeight={"medium"}
+            sx={{
+              ...style,
+              fontSize: { xs: "1rem", lg: "1.5rem" },
+              fontWeight: "bold",
+              display: { xs: "none", lg: "block" },
+            }}
           >
             SpyroTechTales
           </Typography>
         </Box>
 
-        {/* Login and Get Started Box */}
+        {/* {page an dlinks} */}
+        <Box display={{ xs: "none", sm: "flex", md: "flex" }} gap={3}>
+          {nav_data?.map((item, index) => (
+            <Button key={index} onClick={() => navigate(item.link)}>
+              <Typography
+                sx={{ ...style, fontSize: "1rem", textTransform: "none" }}
+              >
+                {item.nane}
+              </Typography>
+            </Button>
+          ))}
+        </Box>
+
+        {/* {Buttona} */}
         <Box
-          display={{ xs: "none", lg: "flex" }}
+          display="flex"
           justifyContent={"center"}
           alignItems={"center"}
           gap={2}
         >
-          <Button onClick={() => navigate("/login")}>
-            <Typography
+          {button_data?.map((item, index) => (
+            <Button
+              key={index}
               sx={{
-                color: "grey",
-                fontFamily: '"Roboto", sans-serif',
-                fontWeight: "small",
+                background: "linear-gradient(to right, #06b6d4, #3b82f6)",
+                color: "white",
                 textTransform: "none",
+                display: { xs: "none", lg: "block" },
               }}
+              onClick={() => navigate(item.link)}
             >
-              Sign In
-            </Typography>
-          </Button>
-          <Button
-            sx={{
-              background: "linear-gradient(to right, #2563eb, #9333ea)",
-              transition: "0.3s",
-              "&:hover": {
-                background: "linear-gradient(to right, #1d4ed8, #7e22ce)",
-              },
-              color: "white",
-            }}
-          >
-            <Typography sx={{ textTransform: "none" }}>Get Started</Typography>
-          </Button>
+              {item.nane}
+            </Button>
+          ))}
+          <IconButton sx={{ p: 0, m: 0, display: { xs: "block", lg: "none" } }}>
+            <LocalFireDepartmentOutlinedIcon
+              fontSize="large"
+              sx={{
+                padding: 1,
+                background: "linear-gradient(to right, #06b6d4, #3b82f6)",
+                color: "white",
+                borderRadius: 3,
+              }}
+            />
+          </IconButton>
         </Box>
       </Box>
-
-      {/* Sidebar Drawer */}
-      <Drawer
-        variant="persistent"
-        open={toogleSideBar} // Sidebar toggles based on button click
-        PaperProps={{
-          sx: {
-            height: "100%", // Make the sidebar fill the height of the screen
-            boxShadow: 2,
-            display:
-              loc.pathname.includes("login") ||
-              loc.pathname.includes("register")
-                ? "none"
-                : "block",
-            // Removed unnecessary margins and padding
-          },
-        }}
-      >
-        <Box
-          sx={{
-            width: 300, // Fixed width for sidebar
-          }}
-        >
-          {/* Close Button */}
-          <Box display="flex" justifyContent="flex-end" p={1}>
-            <IconButton onClick={handleCloseSidebar}>
-              <CloseIcon />
-            </IconButton>
-          </Box>
-
-          {/* Topics Box */}
-          <Box paddingLeft={2} mt={2}>
-            <Typography
-              fontSize={{ xs: "1rem", lg: "1.5rem" }}
-              fontWeight={"medium"}
-              fontFamily='"Roboto", sans-serif'
-            >
-              Topics
-            </Typography>
-          </Box>
-
-          {/* Side List Box */}
-          <Box mt={1} padding={1}>
-            <Collapsable
-              name={"Javascript"}
-              items={js_topics}
-              icon={<CodeIcon sx={{ color: "#fed250" }} />}
-              borderColor={"2px solid #fed250"}
-            />
-            <Collapsable
-              name={"React"}
-              items={react_topics}
-              icon={<CodeIcon sx={{ color: "blue" }} />}
-              borderColor={"2px solid blue"}
-            />
-          </Box>
-        </Box>
-      </Drawer>
     </>
   );
 };
 
-export default NavBar;
+export default Navbar;
